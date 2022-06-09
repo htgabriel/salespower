@@ -1,0 +1,30 @@
+{
+  "name": "salespower",
+  "version": "1.0.0",
+  "description": "Aplicação para realização dos testes do Sales Power",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "NODE_ENV=production&&node index.js",
+    "development": "SET NODE_ENV=development&&nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "salespower"
+  },
+  "author": "Gabriel Henrique",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "body-parser": "^1.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "knex": "^2.1.0",
+    "moment": "^2.29.3",
+    "mysql2": "^2.3.3",
+    "nodemon": "^2.0.16",
+    "objection": "^3.0.1"
+  }
+}
