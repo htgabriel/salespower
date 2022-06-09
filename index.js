@@ -6,9 +6,9 @@ import cors from 'cors'
 import bodyParser from 'body-parser'
 import Knex from "knex"
 import {Model} from 'objection'
-import routes from "./src/routes.js"
+import routes from "./src/routes"
 
-const PORT = process.env.NODE_PORT | 8000
+const PORT = process.env.NODE_PORT || 3000
 const ambient = process.env.NODE_ENV ? process.env.NODE_ENV.trim() : 'development'
 const __dirname = dirname(fileURLToPath(import.meta.url));
 dotenv.config({ path: path.join(__dirname, '.env', ambient)})
@@ -33,5 +33,5 @@ app.use(cors())
 app.use(routes)
 
 app.listen(PORT, () => {
-	console.log('Running...')
+	console.log(`Running on port ${PORT}...`)
 })
