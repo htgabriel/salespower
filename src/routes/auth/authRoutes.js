@@ -15,7 +15,7 @@ authRoutes.post("/login", async (req, res) => {
 		.where('kurz', '=', user)
 		.where('pw', '=', pwCrypt)
 
-	if(!User) throw new Error("Usuário não encontrado")
+	if(!User) throw new Error("Usuário ou senha incorretos")
 
 	const token = generateToken(User?.id)
 
