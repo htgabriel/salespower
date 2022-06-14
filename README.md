@@ -2,7 +2,7 @@
 
 ## Scripts acessíveis
 ```bash
-  npm run deploy
+  yarn development
 ```
 Roda o app.\
 A porta padrão é definida como `3000`.\
