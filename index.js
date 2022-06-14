@@ -26,9 +26,8 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(cors())
 app.use(routes)
 
-app.listen(PORT, () => {
-	// verifyToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTQ4MDY0NTksImV4cCI6MTY1NDgwNjU3OX0.o2Ee2As0fRD7z83tvBEs4oRcrI3R-mluA5yOJhponGc')
-})
+app.listen(PORT)
+app.use("/", (req, res) => res.status(200).json({name: "Sales Power APP", state: `Running on port ${PORT}`}))
 
 app.use((error, req, res, next) => {
 	res.status(400).json({
