@@ -1,29 +1,23 @@
 import path, {dirname} from 'path'
 import dotenv from 'dotenv'
 import { fileURLToPath } from 'url'
+// noinspection ES6UnusedImports
+import * as asyncErrors from "express-async-errors"
 import express from 'express'
 import cors from 'cors'
 import bodyParser from 'body-parser'
 import Knex from "knex"
 import {Model} from 'objection'
 import routes from "./src/routes"
+import config from "./src/config/knexfile.js"
 
 const PORT = process.env.NODE_PORT || 3000
-const ambient = process.env.NODE_ENV ? process.env.NODE_ENV.trim() : 'development'
+const environment = process.env.NODE_ENV ? process.env.NODE_ENV.trim() : 'development'
 const __dirname = dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.join(__dirname, '.env', ambient)})
 
-const knex = Knex({
-	client: "mysql2",
-	useNullAsDefault: true,
-	connection: {
-		host: process.env.DB_HOST,
-		port: 3306,
-		user: process.env.DB_USER,
-		password: process.env.DB_PASSWORD,
-		database: process.env.DB_DATABASE
-	}
-})
+dotenv.config({ path: path.join(__dirname, `.env.${environment}`)})
+
+const knex = Knex( config)
 Model.knex(knex)
 
 const app = express()
@@ -33,5 +27,13 @@ app.use(cors())
 app.use(routes)
 
 app.listen(PORT, () => {
-	console.log(`Running on port ${PORT}...`)
+	// verifyToken('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NTQ4MDY0NTksImV4cCI6MTY1NDgwNjU3OX0.o2Ee2As0fRD7z83tvBEs4oRcrI3R-mluA5yOJhponGc')
+})
+
+app.use((error, req, res, next) => {
+	res.status(400).json({
+		error: true,
+		message: error.toString()
+	})
+	next()
 })
